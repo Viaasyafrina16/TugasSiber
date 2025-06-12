@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unggah File</title>
+    <style>
+        img {
+            max-width: 200px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Unggah File</h1>
+
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    <input type="file" name="fileToUpload" id="fileToUpload" onchange="previewFile()" required>
+    <br>
+    <img id="preview" src="" alt="Preview akan muncul di sini"/>
+    <br>
+    <button type="submit" name="submit">Unggah File</button>
+</form>
+
+<hr>
+
+<h2>Daftar File yang Sudah Diupload</h2>
+<iframe src="list.php" width="100%" height="300" style="border:none;"></iframe>
+
+<script>
+function previewFile() {
+    const preview = document.getElementById('preview');
+    const file = document.getElementById('fileToUpload').files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = function () {
+        preview.src = reader.result;
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = "";
+    }
+}
+</script>
+
+</body>
+</html>
